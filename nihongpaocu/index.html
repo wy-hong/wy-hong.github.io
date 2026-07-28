@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>霓虹跑酷 · Neon Rush 3D</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+<div id="game-container"></div>
+<div id="vignette"></div>
+<div id="warp-lines"></div>
+<div id="scene-flash"></div>
+<div id="fx"></div>
+<div id="ach-toast"></div>
+
+<!-- HUD -->
+<div id="hud">
+  <div class="hud-box" id="score-box">
+    <div class="hud-label">SCORE</div>
+    <div class="hud-value" id="score">0</div>
+    <div class="hud-sub"><span id="scene-name">霓虹都市</span> · <span id="dist">0</span> m · <span id="speed-val">13</span> m/s<span id="speed-max" class="max-tag">MAX</span></div>
+  </div>
+  <div class="hud-box" id="coin-box">
+    <div class="hud-label">COINS</div>
+    <div class="hud-value" id="coins">0</div>
+  </div>
+</div>
+
+<!-- 道具状态 -->
+<div id="powerups">
+  <div class="pu-item" id="pu-shield"><span class="pu-icon">◈</span><span class="pu-time">0</span></div>
+  <div class="pu-item" id="pu-magnet"><span class="pu-icon">◎</span><span class="pu-time">0</span></div>
+  <div class="pu-item" id="pu-rage"><span class="pu-icon">✸</span><span class="pu-time">0</span></div>
+</div>
+
+<div id="combo">COMBO ×2</div>
+<div id="banner"></div>
+<div id="countdown">3</div>
+
+<!-- 开始界面 -->
+<div class="overlay" id="overlay-start">
+  <div class="game-title">霓虹跑酷</div>
+  <div class="game-subtitle">NEON RUSH 3D</div>
+  <div class="badges">
+    <span class="badge">WebGL 实时 3D</span>
+    <span class="badge">程序化音效 · 合成音乐</span>
+    <span class="badge">无尽关卡生成</span>
+    <span class="badge">辉光后期渲染</span>
+    <span class="badge">道具系统</span>
+    <span class="badge">二段跳 · 高台跑酷</span>
+    <span class="badge">6 种障碍变化</span>
+    <span class="badge">4 大主题场景</span>
+  </div>
+  <button class="btn" id="btn-start">开始游戏</button>
+  <div class="menu-row">
+    <button class="ghost-btn" id="btn-rank">排行榜</button>
+    <button class="ghost-btn" id="btn-ach">成就</button>
+    <button class="ghost-btn" id="btn-skin">皮肤</button>
+  </div>
+  <div class="controls-hint">
+    <span class="key">←</span><span class="key">→</span> 变道 &nbsp;
+    <span class="key">↑</span>/<span class="key">空格</span> 跳跃（空中再按 = 二段跳） &nbsp;
+    <span class="key">↓</span> 滑铲 &nbsp;
+    <span class="key">P</span> 暂停 &nbsp;
+    <span class="key">M</span> 静音<br>
+    蓝色高台可跳上去奔跑 · 小心左右滑动的紫色高墙<br>
+    <span class="blink">按 空格 快速开始</span>
+  </div>
+</div>
+
+<!-- 结算界面 -->
+<div class="overlay hidden" id="overlay-over">
+  <div class="over-title">游戏结束</div>
+  <div id="new-record">★ NEW RECORD ★</div>
+  <div class="stats-grid">
+    <div class="stat-cell"><div class="v" id="final-score">0</div><div class="k">得分</div></div>
+    <div class="stat-cell"><div class="v" id="final-dist">0</div><div class="k">距离 / m</div></div>
+    <div class="stat-cell"><div class="v" id="final-coins">0</div><div class="k">金币</div></div>
+    <div class="stat-cell"><div class="v" id="best-score">0</div><div class="k">最高分</div></div>
+  </div>
+  <button class="btn" id="btn-restart">再来一局</button>
+  <div class="menu-row">
+    <button class="ghost-btn" id="btn-rank2">排行榜</button>
+    <button class="ghost-btn" id="btn-menu">主菜单</button>
+  </div>
+  <div class="controls-hint"><span class="blink">按 空格 立即重开</span></div>
+</div>
+
+<!-- 排行榜 -->
+<div class="overlay hidden" id="overlay-rank">
+  <div class="panel-title">本地排行榜</div>
+  <div id="rank-list"></div>
+  <div class="menu-row">
+    <button class="ghost-btn" id="btn-rank-close">返回</button>
+    <button class="ghost-btn danger" id="btn-rank-clear">清空排行榜</button>
+  </div>
+</div>
+
+<!-- 成就 -->
+<div class="overlay hidden" id="overlay-ach">
+  <div class="panel-title">成就系统</div>
+  <div id="ach-list"></div>
+  <button class="ghost-btn" id="btn-ach-close">返回</button>
+</div>
+
+<!-- 皮肤选择 -->
+<div class="overlay hidden" id="overlay-skin">
+  <div class="panel-title">选择皮肤</div>
+  <div id="skin-list"></div>
+  <button class="ghost-btn" id="btn-skin-close">返回</button>
+</div>
+
+<!-- 暂停 -->
+<div class="overlay hidden" id="overlay-pause">
+  <div class="pause-title">已暂停</div>
+  <div class="controls-hint">按 <span class="key">P</span> 或 <span class="key">Esc</span> 继续</div>
+</div>
+
+<button class="mini-btn" id="btn-mute">SOUND · ON</button>
+
+<script src="static/js/three.min.js"></script>
+<script src="static/js/shaders/CopyShader.js"></script>
+<script src="static/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="static/js/postprocessing/EffectComposer.js"></script>
+<script src="static/js/postprocessing/RenderPass.js"></script>
+<script src="static/js/postprocessing/ShaderPass.js"></script>
+<script src="static/js/postprocessing/UnrealBloomPass.js"></script>
+<script src="static/js/config.js"></script>
+<script src="static/js/achieve.js"></script>
+<script src="static/js/audio.js"></script>
+<script src="static/js/textures.js"></script>
+<script src="static/js/world.js"></script>
+<script src="static/js/particles.js"></script>
+<script src="static/js/spawner.js"></script>
+<script src="static/js/game.js"></script>
+<!-- 开发调试：正式发布前删除本行与 static/js/dev.js -->
+<script src="static/js/dev.js"></script>
+</body>
+</html>
