@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>霓虹飞驰 · Neon Rush 3D</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="loading"><div class="spin"></div><p>正在构建霓虹世界…</p></div>
+
+<div id="menu" class="overlay hidden">
+  <div class="title">NEON RUSH</div>
+  <div class="subtitle">霓 虹 飞 驰 · 3 D</div>
+  <button class="btn" id="startBtn">启动引擎</button>
+  <div class="menu-row">
+    <button class="btn-sm" id="achBtn">成 就</button>
+    <button class="btn-sm" id="histBtn">历史成绩</button>
+    <button class="btn-sm" id="musicBtn">音乐：开</button>
+  </div>
+  <div class="hiscore" id="hiscore"></div>
+  <div class="help">
+    <span><kbd>A</kbd><kbd>D</kbd> / <kbd>←</kbd><kbd>→</kbd> <b>转向</b></span>
+    <span><kbd>W</kbd> / <kbd>↑</kbd> <b>推进加速</b></span>
+    <span><kbd>P</kbd> <b>暂停</b></span>
+    <span><kbd>M</kbd> <b>音乐</b></span>
+    <span>移动端：倾斜手机或触屏拖动操控</span>
+  </div>
+</div>
+
+<div id="hud" class="hidden">
+  <div class="hud-box" id="scoreBox"><div class="label">SCORE</div><div id="score">0</div></div>
+  <div class="hud-box" id="gemBox"><div class="label">CRYSTAL</div><div id="gems">◆ 0</div></div>
+  <div class="hud-box" id="speedBox"><div class="label">VELOCITY</div><div id="speed">0 km/h</div></div>
+  <div id="combo"></div>
+  <div id="shieldIcon">◈ SHIELD ONLINE</div>
+  <div id="powers"></div>
+  <div id="msg"></div>
+</div>
+<div id="vignette"></div>
+
+<div id="over" class="overlay hidden">
+  <div class="over-title">GAME OVER</div>
+  <div id="newRecord" class="hidden">★ 新纪录 ★</div>
+  <div class="stats">
+    <div class="stat"><div class="label">SCORE</div><div class="val" id="finalScore">0</div></div>
+    <div class="stat"><div class="label">CRYSTAL</div><div class="val" id="finalGems" style="text-shadow:0 0 16px rgba(255,209,102,.8)">0</div></div>
+    <div class="stat"><div class="label">DISTANCE</div><div class="val" id="finalDist">0m</div></div>
+  </div>
+  <button class="btn" id="retryBtn">再次出击</button>
+  <div class="menu-row"><button class="btn-sm" id="homeBtn">返回主页</button></div>
+  <div class="help" style="margin-top:22px"><span>按 <kbd>R</kbd> 快速重开 · <kbd>Esc</kbd> 返回主页</span></div>
+</div>
+
+<div id="achPanel" class="overlay panel hidden">
+  <div class="over-title" style="font-size:clamp(30px,5vw,54px)">ACHIEVEMENTS</div>
+  <div class="panel-list" id="achList"></div>
+  <div class="menu-row">
+    <button class="btn-sm btn-danger" id="achClear">清除成就</button>
+    <button class="btn-sm" id="achClose">返 回</button>
+  </div>
+</div>
+
+<div id="historyPanel" class="overlay panel hidden">
+  <div class="over-title" style="font-size:clamp(30px,5vw,54px)">HISTORY</div>
+  <div class="panel-list" id="historyList"></div>
+  <div class="menu-row">
+    <button class="btn-sm btn-danger" id="histClear">清除记录</button>
+    <button class="btn-sm" id="histClose">返 回</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="three.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
