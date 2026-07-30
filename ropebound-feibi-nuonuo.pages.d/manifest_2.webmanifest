@@ -1,0 +1,11 @@
+{
+  "name": "绳结同行",
+  "short_name": "绳结同行",
+  "description": "菲比啾比、弗糯糯与王小猪的双人绳索跳跃冒险。",
+  "start_url": "/",
+  "scope": "/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#eaf8ff",
+  "theme_color": "#dff3ff"
+}
